@@ -3,7 +3,6 @@
 
 set(_primlibs_benchmark_enable ${THEROCK_BUILD_TESTING})
 set(_primlibs_benchmark_deps)
-set(_primlibs_benchmark_includes)
 # amdsmi is Linux-only and only declared when THEROCK_ENABLE_CORE_AMDSMI is ON
 # (see core/CMakeLists.txt). Benchmarks depend on primbench which requires
 # amdsmi, so they must be disabled when amdsmi is unavailable (e.g., the
@@ -13,7 +12,6 @@ if(NOT WIN32)
     set(_primlibs_benchmark_enable "OFF")
   else()
     set(_primlibs_benchmark_deps amdsmi)
-    set(_primlibs_benchmark_includes therock_primlibs_benchmark_deps.cmake)
   endif()
 endif()
 
@@ -33,8 +31,6 @@ if(THEROCK_ENABLE_RAND)
       -DROCM_DIR=
       -DBUILD_TEST=${THEROCK_BUILD_TESTING}
       -DBUILD_BENCHMARK=${_primlibs_benchmark_enable}
-    CMAKE_INCLUDES
-      ${_primlibs_benchmark_includes}
     COMPILER_TOOLCHAIN
       amd-hip
     BUILD_DEPS
@@ -146,8 +142,6 @@ if(THEROCK_ENABLE_PRIM)
         -DBUILD_TEST=ON
         -DBUILD_BENCHMARK=${_primlibs_benchmark_enable}
         -DUSE_SYSTEM_LIB=ON
-      CMAKE_INCLUDES
-        ${_primlibs_benchmark_includes}
       COMPILER_TOOLCHAIN
         amd-hip
       BUILD_DEPS
@@ -176,8 +170,6 @@ if(THEROCK_ENABLE_PRIM)
       -DROCM_DIR=
       -DBUILD_TEST=${THEROCK_BUILD_TESTING}
       -DBUILD_BENCHMARK=${_primlibs_benchmark_enable}
-    CMAKE_INCLUDES
-      ${_primlibs_benchmark_includes}
     COMPILER_TOOLCHAIN
       amd-hip
     BUILD_DEPS
@@ -205,8 +197,6 @@ if(THEROCK_ENABLE_PRIM)
       -DROCM_DIR=
       -DBUILD_TEST=${THEROCK_BUILD_TESTING}
       -DBUILD_BENCHMARK=${_primlibs_benchmark_enable}
-    CMAKE_INCLUDES
-      ${_primlibs_benchmark_includes}
     COMPILER_TOOLCHAIN
       amd-hip
     BUILD_DEPS
